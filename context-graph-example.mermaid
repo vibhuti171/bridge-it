@@ -1,0 +1,15 @@
+graph TD
+  user_1[User: Riya]
+  role_user_1[Role: Student]
+  goal_user_1[Goal: Complete Data Science Assignment]
+  screen_user_1[Screen: Assignment Dashboard]
+  course_user_1[Course: Intro to Data Science]
+  msg_123[Message: "I'm stuck on my assignment. What should I focus on?"]
+  res_456[Response: "As a Student working on ..."]
+
+  user_1 -- HAS_ROLE --> role_user_1
+  user_1 -- WORKING_ON --> goal_user_1
+  user_1 -- CURRENT_SCREEN --> screen_user_1
+  goal_user_1 -- RELATED_TO --> course_user_1
+  user_1 -- SENT --> msg_123
+  msg_123 -- GENERATED --> res_456
