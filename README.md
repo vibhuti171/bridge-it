@@ -82,6 +82,28 @@ User (user_1, name="Riya")
 
 ![Context Graph Example](context-graph-example.png)
 
+## Limitations of the Current Approach
+
+- **In-Memory Storage**: The context graph and vector store are currently in-memory, so all data is lost on restart and cannot scale beyond a single process or machine.
+- **Single-Tenant Design**: The current implementation assumes a single workspace and does not isolate data between different organizations or tenants.
+- **No Access Control**: There is no authentication or authorization; any user can access or modify any context.
+- **Performance**: As the number of users, nodes, and edges grows, in-memory operations may become slow and resource-intensive.
+- **Persistence**: No database or persistent storage is used, making it unsuitable for production or long-term use.
+- **Limited Querying**: The graph querying capabilities are basic and may not support complex analytics or recommendations.
+- **Manual Seeding**: User and context creation is interactive/manual, which is not practical for large-scale or automated onboarding.
+
+## Suggestions for Scaling the Context Graph in a Multi-Tenant SaaS Environment
+
+- **Persistent Graph Database**: Use a scalable graph database (e.g., Neo4j, Amazon Neptune, ArangoDB) to store nodes and edges persistently and efficiently.
+- **Tenant Isolation**: Add a `tenant_id` property to all nodes and edges, and enforce strict tenant-based access controls at the data and API layers.
+- **Authentication & Authorization**: Integrate with an identity provider (e.g., OAuth, SAML) to authenticate users and authorize access to their own tenant's data only.
+- **Sharding & Partitioning**: For very large graphs, partition data by tenant or user, and use database sharding to distribute load.
+- **API Layer**: Expose graph operations via a secure, multi-tenant REST or GraphQL API, with rate limiting and monitoring.
+- **Background Jobs**: Offload heavy analytics, recommendations, or batch updates to background workers or serverless functions.
+- **Automated Onboarding**: Provide APIs or admin tools for bulk user/context import and automated seeding.
+- **Monitoring & Auditing**: Track graph changes, access patterns, and errors for security and compliance.
+- **Backup & Disaster Recovery**: Implement regular backups and recovery plans for graph and knowledge data.
+
 ## Usage
 
 1. Install dependencies:
