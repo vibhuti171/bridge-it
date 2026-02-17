@@ -1,0 +1,9 @@
+langgraph
+langchain
+langchain-google-genai
+google-generativeai
+networkx
+faiss-cpu
+python-dotenv
+pydantic
+rich
